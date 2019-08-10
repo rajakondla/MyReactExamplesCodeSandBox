@@ -1,0 +1,61 @@
+In javascript,
+
+1) Unlike a regular function, a class constructor can’t be called without new
+2) Class methods are non-enumerable. A class definition sets enumerable flag to z
+   false for all methods in the "prototype".
+   That’s good, because if we for..in over an object, we usually don’t want its class methods.
+3) Classes always use strict. All code inside the class construct is   
+   automatically in strict mode.
+   
+React life-cycle methods:
+
+Mount phase
+
+1) contructor is where we initialize state
+2) getDerivedStateFromProps
+3) render method where react mounts on to the DOM.
+4) componentDidMount where we can make async calls or directly manipulate the DOM if you need
+
+Update phase
+
+1) getDerivedStateFromProps
+2) shouldComponentUpdate. we can check old props and new props and return true or false. If false, this update cycle ends.
+3) render method where react mounts on to the DOM.
+4) getSnapshotBeforeUpdate runs
+5) ComponentDidUpdate can make async calls or directly manipulate the DOM if you need like componentDidMount
+
+Unmount phase
+
+1) componentWillUnmount will run when you remove the component from DOM. Any clean up like websockets or intervals can be cleaned here.
+
+getDerivedStateFromError life-cycle method will fire when there is an error in the component and we can update state if you need
+
+freeze vs const
+----------------
+
+var ob1 = {
+   foo : 1,
+    bar : {
+        value : 2   
+    }
+};
+Object.freeze(ob1);
+
+const ob2 = {
+   foo : 1,
+    bar : {
+        value : 2   
+    }
+}
+
+ob1.foo = 4;  // (frozen) ob1.foo not modified
+ob2.foo = 4;  // (const) ob2.foo modified
+
+ob1.bar.value = 4;  // (frozen) modified, because ob1.bar is nested
+ob2.bar.value = 4;  // (const) modified
+
+ob1.bar = 4;  // (frozen) not modified, bar is a key of obj1
+ob2.bar = 4;  // (const) modified
+
+ob1 = {};  // (frozen) ob1 redeclared
+ob2 = {}; // (const) ob2 not redeclared

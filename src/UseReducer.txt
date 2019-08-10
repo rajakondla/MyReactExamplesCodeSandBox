@@ -1,0 +1,39 @@
+React re-renders when there is change in state and props.
+
+useReducer is like reduce in javascript
+
+let num=[1,2,3,4,5];
+const reducer=(aggregateVal,currentVal)=>aggregateVal+currentVal;
+
+// reduce(reducer function,initialVal)
+const val=num.reduce(reducer,5);
+console.log(val);
+// 15
+
+like reduce function expect reducer function and initial value, useReducer expects reducer function and initial state
+
+useReducer hook return current state and dispatch function.
+
+useReducer use 
+1) when the state is array or object.
+2) Business logic involved to update the state.
+3) When multiple state update is involved and each one relate to another
+4) Using Global state. When using global state you have to pass state and its corresponding action to update state to different child component. So, if we use useState we have to pass state and different actions like
+
+useState
+--------
+<ChildComponent1 state={stateA} action={setStateA} />
+<ChildComponent2 state={stateB} action={setStateB} />
+<ChildComponent3 state={stateC} action={setStateC} />
+
+useReducer
+<ChildComponent1 state={obj.stateA} action={dispatch({type:"A"})} />
+<ChildComponent2 state={obj.stateB} action={dispatch({type:"B"})} />
+<ChildComponent3 state={obj.stateC} action={dispatch({type:"C"})} />
+
+here we are having single dispatch action method for all state.
+
+
+
+
+
